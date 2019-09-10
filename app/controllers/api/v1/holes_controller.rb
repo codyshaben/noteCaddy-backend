@@ -1,4 +1,4 @@
-class Api::V1HolesController < ApplicationController
+class Api::V1::HolesController < ApplicationController
   before_action :set_hole, only: [:show, :update, :destroy]
 
   # GET /holes
