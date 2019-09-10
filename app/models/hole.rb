@@ -1,0 +1,2 @@
+class Hole < ApplicationRecord
+end
