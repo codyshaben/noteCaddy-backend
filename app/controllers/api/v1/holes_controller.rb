@@ -46,6 +46,6 @@ class Api::V1::HolesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def hole_params
-      params.require(:hole).permit(:yards, :par, :handicap, :course_id)
+      params.require(:hole).permit(:yards, :par, :handicap, :course_id, :tee)
     end
 end

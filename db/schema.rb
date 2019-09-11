@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_155034) do
+ActiveRecord::Schema.define(version: 2019_09_11_221714) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.string "course_location"
+    t.string "location"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -23,14 +24,24 @@ ActiveRecord::Schema.define(version: 2019_09_10_155034) do
     t.integer "yards"
     t.integer "par"
     t.integer "handicap"
+    t.integer "tee"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tee"
+    t.index ["course_id"], name: "index_holes_on_course_id"
+  end
+
+  create_table "player_courses", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_player_courses_on_course_id"
+    t.index ["player_id"], name: "index_player_courses_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "username"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

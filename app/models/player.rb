@@ -1,4 +1,4 @@
 class Player < ApplicationRecord
-    has_many :courses
-    has_many :holes, through: :courses
+    has_many :player_courses
+    has_many :courses, through: :player_courses
 end

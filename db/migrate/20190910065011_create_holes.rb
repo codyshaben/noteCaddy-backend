@@ -4,8 +4,8 @@ class CreateHoles < ActiveRecord::Migration[5.2]
       t.integer :yards
       t.integer :par
       t.integer :handicap
-      t.integer :course_id
-
+      t.integer :tee
+      t.references :course, foreign_key: true
       t.timestamps
     end
   end
