@@ -4,7 +4,7 @@ class Api::V1::PlayersController < ApplicationController
   # GET /players
   def index
     @players = Player.all
-
+    #include gets all of that players courses to be included inside api index page
     render json: @players, :include => :courses
   end
 
