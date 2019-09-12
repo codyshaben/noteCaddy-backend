@@ -24,6 +24,19 @@ class Api::V1::PlayersController < ApplicationController
     end
   end
 
+  def add_course
+    @player_course = PlayerCourse.new(player_course_params)
+
+    if @player_course.save
+      render json: @player_course, status: :created
+    else
+      render json: @player_course.errors, status: :unprocessable_entity
+    end
+  end
+
+    
+
+
   # PATCH/PUT /players/1
   def update
     if @player.update(player_params)
@@ -34,9 +47,14 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   # DELETE /players/1
-  def destroy
-    @player.destroy
+  def remove_course
+    @player = Player.find(1)
+    @player.courses.destroy(params[:course_id])
   end
+
+  
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -47,5 +65,9 @@ class Api::V1::PlayersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def player_params
       params.require(:player).permit(:username)
+    end
+
+    def player_course_params
+      params.require(:player).permit(:player_id, :course_id)
     end
 end

@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puttmaster = Player.create(name: "Puttmaster1")
+phil = Player.create(name: "Phil")
 
 ballyneal = Course.create(name: "Ballyneal G.C.", location: "Holyoke", image: "https://www.ballyneal.com/wp-content/uploads/2015/01/new-hole-7-a.jpg")
 castle_pines = Course.create(name: "Castle Pines G.C.", location: "Castle Rock", image: "http://www.nicklaus.com/design/assets/images/castlepines/gallery/3.jpg")
