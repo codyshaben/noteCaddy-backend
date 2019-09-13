@@ -24,6 +24,16 @@ class Api::V1::HolesController < ApplicationController
     end
   end
 
+  def add_note
+    @note = Note.new(note_params)
+
+    if @note.save
+      render json: @note, status: :created
+    else
+      render json: @note.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /holes/1
   def update
     if @hole.update(hole_params)
@@ -34,8 +44,9 @@ class Api::V1::HolesController < ApplicationController
   end
 
   # DELETE /holes/1
-  def destroy
-    @hole.destroy
+  def remove_note
+    @hole = hole.find(:hole_id)
+    @hole.notes.destroy(params[:note_id])
   end
 
   private
