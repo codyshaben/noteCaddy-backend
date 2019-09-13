@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :courses
       resources :holes
       resources :players
+      resources :notes
 
       post 'addCourse', to: 'players#add_course'
       delete 'removeCourse/:course_id', to: 'players#remove_course'
