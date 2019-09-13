@@ -48,4 +48,5 @@ class Api::V1::CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:name, :course_location)
     end
+    
 end

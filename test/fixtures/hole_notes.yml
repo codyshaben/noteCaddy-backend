@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hole_id: one
+  note_id: one
+
+two:
+  hole_id: two
+  note_id: two

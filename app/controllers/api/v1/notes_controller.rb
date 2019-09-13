@@ -24,6 +24,7 @@ class Api::V1::NotesController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)

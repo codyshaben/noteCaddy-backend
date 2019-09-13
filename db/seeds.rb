@@ -30,7 +30,7 @@ the_ridge = Course.create(name: "The Ridge At Castle Pines North", location: "Ca
 broadmoar_west = Course.create(name: "The Broadmoar G.C. (West)", location: "Colorado Springs", image: "http://colorado.twoguyswhogolf.com/reviews/broadmoorwest/Broadmoor-West_5.jpg")
 cordillera = Course.create(name: "The Club At Cordillera (Valley)", location: "Edwards", image: "https://jeffreysrealestate.files.wordpress.com/2013/04/cordilleria-valley-cousre.jpg")
 
-ballyneal1 = Hole.create(yards: 382, par: 4, handicap: 9, course: ballyneal, tee: 1, image: "https://www.ballyneal.com/wp-content/uploads/2015/01/hole3-thumb-new.jpg")
+ballyneal1 = Hole.create(yards: 382, par: 4, handicap: 9, course: ballyneal, tee: 1, image: "")
 ballyneal2 = Hole.create(yards: 490, par: 4, handicap: 3, course: ballyneal, tee: 2, image: "")
 ballyneal3 = Hole.create(yards: 145, par: 3, handicap: 17, course: ballyneal, tee: 3, image: "")
 ballyneal4 = Hole.create(yards: 573, par: 5, handicap: 5, course: ballyneal, tee: 4, image: "")

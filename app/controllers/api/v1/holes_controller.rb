@@ -15,7 +15,10 @@ class Api::V1::HolesController < ApplicationController
 
   # POST /holes
   def create
-    @hole = Hole.new(hole_params)
+    @hole = Hole.new()
+    @hole.note_id_id = params[note_id_id]
+    @hole.hole_id_id = params[hole_id_id]
+
 
     if @hole.save
       render json: @hole, status: :created, location: api_v1_hole_url(@hole)
@@ -25,12 +28,17 @@ class Api::V1::HolesController < ApplicationController
   end
 
   def add_note
-    @note = Note.new(note_params)
+    # byebug
+    @hole_note = HoleNote.new
+    @hole_note.note_id_id = params[note_id_id]
+    @hole_note.hole_id_id = params[hole_id_id]
 
-    if @note.save
-      render json: @note, status: :created
+
+
+    if @hole_note.save
+      render json: @hole_note, status: :created
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render json: @hole_note.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,7 +64,8 @@ class Api::V1::HolesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def hole_params
-      params.require(:hole).permit(:yards, :par, :handicap, :course_id, :tee)
-    end
+    # def hole_params
+    #   params.require(:hole).permit(:yards, :par, :handicap, :course_id, :tee)
+    # end
+
 end
