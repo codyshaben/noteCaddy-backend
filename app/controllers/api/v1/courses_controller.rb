@@ -1,5 +1,5 @@
 class Api::V1::CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :update, :destroy]
+  before_action only: [:show, :update, :destroy]
 
   # GET /courses
   def index
@@ -35,14 +35,16 @@ class Api::V1::CoursesController < ApplicationController
 
   # DELETE /courses/1
   def destroy
+    @course = Course.find(paramns[:id])
+
     @course.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
-    end
+    # def set_course
+    #   @course = Course.find(params[:id])
+    # end
 
     # Only allow a trusted parameter "white list" through.
     def course_params

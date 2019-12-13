@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_163946) do
+ActiveRecord::Schema.define(version: 2019_12_12_222238) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -21,37 +24,30 @@ ActiveRecord::Schema.define(version: 2019_09_13_163946) do
   end
 
   create_table "hole_notes", force: :cascade do |t|
-    t.integer "hole_id_id"
-    t.integer "note_id_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hole_id_id"], name: "index_hole_notes_on_hole_id_id"
-    t.index ["note_id_id"], name: "index_hole_notes_on_note_id_id"
+    t.bigint "hole_id"
+    t.bigint "note_id"
+    t.index ["hole_id"], name: "index_hole_notes_on_hole_id"
+    t.index ["note_id"], name: "index_hole_notes_on_note_id"
   end
 
   create_table "holes", force: :cascade do |t|
+    t.bigint "course_id"
     t.integer "yards"
     t.integer "par"
     t.integer "handicap"
     t.integer "tee"
-    t.integer "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "image"
     t.index ["course_id"], name: "index_holes_on_course_id"
   end
 
   create_table "notes", force: :cascade do |t|
     t.text "content"
-    t.integer "hole_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "hole_id"
     t.index ["hole_id"], name: "index_notes_on_hole_id"
   end
 
   create_table "player_courses", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "course_id"
+    t.bigint "player_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_player_courses_on_course_id"
@@ -64,4 +60,10 @@ ActiveRecord::Schema.define(version: 2019_09_13_163946) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "hole_notes", "holes"
+  add_foreign_key "hole_notes", "notes"
+  add_foreign_key "holes", "courses"
+  add_foreign_key "notes", "holes"
+  add_foreign_key "player_courses", "courses"
+  add_foreign_key "player_courses", "players"
 end
