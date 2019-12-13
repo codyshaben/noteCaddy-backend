@@ -22,7 +22,4 @@ test:
 
 production:
   <<: *default
-  database: note_caddy,
-  username: 86cb1ccb714c520ddf0e4133fa490c7e86e2edb85d08f859647a80e70e01cb63,
-  password: ylsifzlgujxrkx,
-
+  url: <%=['postgres://mnonsgbiaumrnq:d5cf59f3dd8b38003375bb17f62226016f6b9d88997342d62c621cddaf84cad7@ec2-107-21-235-87.compute-1.amazonaws.com:5432/d4dv139s2crohg']%>
