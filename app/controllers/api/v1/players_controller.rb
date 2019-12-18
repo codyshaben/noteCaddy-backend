@@ -1,31 +1,30 @@
 class Api::V1::PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :update, :destroy]
+  skip_before_action :require_login, only: [:create]
 
-  # GET /players
-  def index
-    @players = Player.all
-    #include gets all of that players courses to be included inside api index page
-    render json: @players, :include => :courses
+  # def index
+  #   @players = Player.all
+  #   #include gets all of that players courses to be included inside api index page
+  #   render json: @players, :include => :courses
+  # end
+
+  def profile 
+    render json: { player: PlayerSerializer.new(current_player) }, status: :accepted 
   end
 
-  # GET /players/1
-  def show
-    render json: @player
-  end
-
-  # POST /players
   def create
-    @player = Player.new(player_params)
-
-    if @player.save
-      render json: @player, status: :created, location: api_v1_player_url(@player)
+    @player = Player.create(player_params)
+    if @player.valid?
+      payload = { player_id: @player.id}
+      token = encode_token(payload)
+      puts token
+      render json: {player: @player, jwt: token}
     else
-      render json: @player.errors, status: :unprocessable_entity
+      render json: {errors: @player.errors.full_messages}, status: not_acceptable
     end
   end
 
   def add_course
-    @player_course = PlayerCourse.new(player_course_params)
+    @player_course = PlayerCourse.create(player_course_params)
 
     if @player_course.save
       render json: @player_course, status: :created
@@ -33,9 +32,6 @@ class Api::V1::PlayersController < ApplicationController
       render json: @player_course.errors, status: :unprocessable_entity
     end
   end
-
-    
-
 
   # PATCH/PUT /players/1
   def update
@@ -53,18 +49,9 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   
-  
-  
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_player
-      @player = Player.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
     def player_params
-      params.require(:player).permit(:username)
+      params.permit(:name, :password)
     end
 
     def player_course_params

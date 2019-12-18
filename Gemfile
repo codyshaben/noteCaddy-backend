@@ -47,3 +47,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0'
 gem 'jwt'
 gem 'pg'
+gem 'active_model_serializers'
