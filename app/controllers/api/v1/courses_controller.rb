@@ -1,5 +1,6 @@
 class Api::V1::CoursesController < ApplicationController
-  before_action only: [:show, :update, :destroy]
+  skip_before_action :require_login, only: [:index]
+
 
   # GET /courses
   def index
